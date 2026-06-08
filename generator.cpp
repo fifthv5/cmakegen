@@ -39,10 +39,21 @@ int main() {
         libraries.push_back(lib);
     }
 
-    // Create the 'src' directory automatically if it is missing (remains empty)
+    // Create the 'src' directory automatically if it is missing
     if (!fs::exists("src")) {
         fs::create_directory("src");
-        std::cout << "-> Created empty 'src' directory.\n";
+        std::cout << "-> Created 'src' directory.\n";
+    }
+
+    // FIX: Automatically create a blank Main.cpp file if it doesn't exist
+    std::string main_path = "src/Main.cpp";
+    if (!fs::exists(main_path)) {
+        std::ofstream blank_main(main_path);
+        if (blank_main.is_open()) {
+            blank_main << "// Blank entry point\n";
+            blank_main.close();
+            std::cout << "-> Created blank Main.cpp inside src/.\n";
+        }
     }
 
     // Scan the 'src' directory for existing C++ source files
