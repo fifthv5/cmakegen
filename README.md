@@ -14,22 +14,20 @@ A simple and lightweight C++ command-line tool designed to bootstrap new C++ pro
 ### 1. Compile the Generator
 Compile the source file using any modern C++ compiler:
 ```bash
-g++ -std=c++17 generator.cpp -o cmake_gen
+g++ generator.cpp -o cmakegen
 ```
 
 ### 2. Run the Program
 Execute the binary in the root directory of your new project:
 ```bash
-./cmake_gen
+./cmakegen
 ```
 
 ### 3. Build Your Target Project
 Once the script generates your `CMakeLists.txt`, build your program using the standard CMake workflow:
 ```bash
-mkdir build
-cd build
-cmake ..
-cmake --build .
+cmake -S . -B build
+cmake --build ./build -j$(nproc)
 ```
 
 ## Prompt Example
